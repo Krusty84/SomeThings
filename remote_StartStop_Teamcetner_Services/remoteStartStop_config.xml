@@ -1,0 +1,24 @@
+<Config>
+	<SystemData>
+		<SMTPServer>yoursmtp.company.com</SMTPServer>
+		<SMTPLogin>company\dude</SMTPLogin>
+		<SMTPPass>QWERTY1234</SMTPPass>
+		<MailFrom>dude@company.com</MailFrom>
+		<MailTo>EveryBody@company.com</MailTo>
+	</SystemData>
+	<Server name="SRVTC1">
+		<ServiceInternalName id="1">TeamcenterServerManager_kalinkaV12</ServiceInternalName>
+		<ServiceInternalName id="2">"Active Workspace Indexing Service"</ServiceInternalName>
+		<ServiceInternalName id="3">"Teamcenter Server Manager srvtc_aw_PoolA"</ServiceInternalName>
+		<ServiceInternalName id="4">idsm</ServiceInternalName>
+		<ServiceInternalName id="999">"Teamcenter FSC Service FSC_SRVTC1_Administrator"</ServiceInternalName>
+	</Server>	
+	<Server name="SRVTC2">
+		<ServiceInternalName id="1">TeamcenterServerManager_srvtc_blm</ServiceInternalName>
+		<ServiceInternalName id="2">"Teamcenter FSC Service FSC_SRVTC2_Administrator"</ServiceInternalName>
+	</Server>	
+	<Server name="SRVTC999">
+		<ServiceInternalName id="1">TeamcenterServerManager_srvtc_blsl1</ServiceInternalName>
+		<ServiceInternalName id="2">"Teamcenter FSC Service FSC_SRVTC999_Administrator"</ServiceInternalName>
+	</Server>	
+</Config>
