@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "d230a02a-91cb-40b3-8945-43f6c45386d7",
+		"name": "Azure SDK REST KIT",
+		"description": "It just for automation and debugging\n\nhttps://docs.microsoft.com/en-us/rest/api/?view=Azure",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Technical Data",
+			"item": [
+				{
+					"name": "Get Resource Groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourcegroups?api-version=2020-09-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"resourcegroups"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-09-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get VM`s List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/virtualMachines?api-version=2021-07-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"providers",
+								"Microsoft.Compute",
+								"virtualMachines"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2021-07-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Networks List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Network/networkInterfaces?api-version=2021-02-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"providers",
+								"Microsoft.Network",
+								"networkInterfaces"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2021-02-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Disks List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Compute/disks?api-version=2020-12-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"providers",
+								"Microsoft.Compute",
+								"disks"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2020-12-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Data About VM",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupID}}/providers/Microsoft.Compute/virtualMachines/{{virtualMachineName}}?api-version=2021-07-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"resourceGroups",
+								"{{resourceGroupID}}",
+								"providers",
+								"Microsoft.Compute",
+								"virtualMachines",
+								"{{virtualMachineName}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2021-07-01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "https://docs.microsoft.com/en-us/rest/api/compute/"
+		},
+		{
+			"name": "COST Data",
+			"item": [
+				{
+					"name": "Get Budgets List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Consumption/budgets?api-version=2019-10-01",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"providers",
+								"Microsoft.Consumption",
+								"budgets"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2019-10-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cost Data By VM Disk",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"ActualCost\",\r\n    \"dataSet\": {\r\n        \"granularity\": \"None\",\r\n        \"aggregation\": {\r\n            \"totalCost\": {\r\n                \"name\": \"Cost\",\r\n                \"function\": \"Sum\"\r\n            },\r\n            \"totalCostUSD\": {\r\n                \"name\": \"CostUSD\",\r\n                \"function\": \"Sum\"\r\n            }\r\n        },\r\n        \"grouping\": [\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"ResourceId\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"ResourceType\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"ResourceLocation\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"ChargeType\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"ResourceGroupName\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"PublisherType\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"ServiceName\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"ServiceTier\"\r\n            },\r\n            {\r\n                \"type\": \"Dimension\",\r\n                \"name\": \"Meter\"\r\n            }\r\n        ],\r\n        \"include\": [\r\n            \"Tags\"\r\n        ],\r\n        \"filter\": {\r\n            \"And\": [\r\n                {\r\n                    \"Dimensions\": {\r\n                        \"Name\": \"ResourceType\",\r\n                        \"Operator\": \"In\",\r\n                        \"Values\": [\r\n                            \"microsoft.compute/disks\"\r\n                        ]\r\n                    }\r\n                },\r\n                {\r\n                    \"Dimensions\": {\r\n                        \"Name\": \"ResourceId\",\r\n                        \"Operator\": \"In\",\r\n                        \"Values\": [\r\n                            \"/subscriptions/{{subscriptionId}}/resourcegroups/{{resourceGroupID}}/providers/microsoft.compute/disks/{{virtualMachineDisk}}\"\r\n                        ]\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"timeframe\": \"Custom\",\r\n    \"timePeriod\": {\r\n        \"from\": \"2021-09-01T00:00:00+00:00\",\r\n        \"to\": \"2021-09-30T23:59:59+00:00\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.CostManagement/query?api-version=2019-11-01&$top=5000",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"providers",
+								"Microsoft.CostManagement",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2019-11-01"
+								},
+								{
+									"key": "$top",
+									"value": "5000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Check for collectionVariables\", function () {",
+					"    let vars = ['clientId', 'clientSecret', 'tenantId', 'subscriptionId'];",
+					"    vars.forEach(function (item, index, array) {",
+					"        console.log(item, index);",
+					"        pm.expect(pm.collectionVariables.get(item), item + \" variable not set\").to.not.be.undefined;",
+					"        pm.expect(pm.collectionVariables.get(item), item + \" variable not set\").to.not.be.empty; ",
+					"    });",
+					"",
+					"    if (!pm.collectionVariables.get(\"bearerToken\") || Date.now() > new Date(pm.collectionVariables.get(\"bearerTokenExpiresOn\") * 1000)) {",
+					"        pm.sendRequest({",
+					"            url: 'https://login.microsoftonline.com/' + pm.collectionVariables.get(\"tenantId\") + '/oauth2/token',",
+					"            method: 'POST',",
+					"            header: 'Content-Type: application/x-www-form-urlencoded',",
+					"            body: {",
+					"                mode: 'urlencoded',",
+					"                urlencoded: [",
+					"                    { key: \"grant_type\", value: \"client_credentials\", disabled: false },",
+					"                    { key: \"client_id\", value: pm.collectionVariables.get(\"clientId\"), disabled: false },",
+					"                    { key: \"client_secret\", value: pm.collectionVariables.get(\"clientSecret\"), disabled: false },",
+					"                    { key: \"resource\", value: pm.collectionVariables.get(\"resource\") || \"https://management.azure.com/\", disabled: false }",
+					"                ]",
+					"            }",
+					"        }, function (err, res) {",
+					"            if (err) {",
+					"                console.log(err);",
+					"            } else {",
+					"                let resJson = res.json();",
+					"                pm.collectionVariables.set(\"bearerTokenExpiresOn\", resJson.expires_on);",
+					"                pm.collectionVariables.set(\"bearerToken\", resJson.access_token);",
+					"            }",
+					"        });",
+					"    }",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "clientId",
+			"value": ""
+		},
+		{
+			"key": "clientSecret",
+			"value": ""
+		},
+		{
+			"key": "tenantId",
+			"value": ""
+		},
+		{
+			"key": "subscriptionId",
+			"value": ""
+		},
+		{
+			"key": "resource",
+			"value": "https://management.azure.com/"
+		},
+		{
+			"key": "resourceGroupID",
+			"value": ""
+		},
+		{
+			"key": "virtualMachineName",
+			"value": ""
+		},
+		{
+			"key": "virtualMachineDisk",
+			"value": ""
+		},
+		{
+			"key": "virtualMachineNetwork",
+			"value": ""
+		},
+		{
+			"key": "bearerToken",
+			"value": ""
+		},
+		{
+			"key": "bearerTokenExpiresOn",
+			"value": ""
+		}
+	]
+}
