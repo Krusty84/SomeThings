@@ -64,7 +64,7 @@ $NicNsg = Get-AzNetworkSecurityGroup -ResourceGroupName $resourceGroupName -Name
 ######
 
 #закроемся явным образом
-$NicNsg | Add-AzNetworkSecurityRuleConfig -Name "TC_Ports_WAN" -Description "Teamcenter Ports that will be opened for WAN" -Access "Deny" -Protocol "Tcp" -Direction "Inbound" -Priority 100 -SourceAddressPrefix "*" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange (80, 443, 3389, 4544, 7001, 3000, 5201) | Set-AzNetworkSecurityGroup
+$NicNsg | Add-AzNetworkSecurityRuleConfig -Name "TC_Ports_WAN" -Description "Teamcenter Ports that will be opened for WAN" -Access "Deny" -Protocol "Tcp" -Direction "Inbound" -Priority 500 -SourceAddressPrefix "*" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange (80, 443, 3389, 4544, 7001, 3000, 5201) | Set-AzNetworkSecurityGroup
 
 #открываем типовые порты Teamcenter и Co для доступа через VPN - BananaCountry
 Get-AzNetworkSecurityGroup -Name $Ngs -ResourceGroupName (Get-AzVM -Name $AvaliableVMS[$ChosenVM].Name).ResourceGroupName | Add-AzNetworkSecurityRuleConfig -Name "VPN_BananaCountry" -Description "Teamcenter and Various Ports that will be opened for BananaCountry VPN" -Access "Allow" -Protocol "Tcp" -Direction "Inbound" -Priority 101 -SourceAddressPrefix "1.2.3.4/24" -SourcePortRange "*" -DestinationAddressPrefix "*" -DestinationPortRange (80, 443, 3389, 4544, 7001, 3000, 5201) | Set-AzNetworkSecurityGroup
@@ -79,3 +79,6 @@ if ($Config4PrivateIP -eq 1) {
 else {
     Write-Host "Если VM Была создана не на базе: Windows_2016_Oracle19c_Tomcat_Java8_202, то не забудьте настроить Firewall в VM, испльзуйте скрипт SetFirewallRules.bat" -ForegroundColor Magenta -BackgroundColor Black
 }
+
+Write-Host -NoNewLine 'Нажмите любую клавишу для завершения работы...';
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
