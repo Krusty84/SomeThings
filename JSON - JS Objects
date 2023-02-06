@@ -1,0 +1,25 @@
+/** Start 1
+
+{
+"payloadId1":{
+              "f_name":"Some First Name_1",
+              "l_name":"Some Last Name_1",
+              },
+"payloadId2":{
+              "f_name":"Some First Name_2",
+              "l_name":"Some Last Name_2",
+              },
+}
+
+**/
+
+let jsonPayload1:any={};
+
+for(let i=0;i<=5;i++){
+  jsonPayload1["payloadId"+i]={};
+  jsonPayload1["payloadId"+i].f_name="Some First Name_"+i;
+  jsonPayload1["payloadId"+i].l_name="Some Last Name_"+i;
+}
+console.log(JSON.stringify(jsonPayload1))
+
+/** End 1 **/
